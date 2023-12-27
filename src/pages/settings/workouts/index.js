@@ -4,12 +4,14 @@ import axios from 'axios';
 import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import useSWR from 'swr'
+import { useSWRConfig } from "swr"
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function Workout() {
     const { data: session } = useSession();
     const { data, error, isLoading } = useSWR(`/api/workout/${session?.user.id}`, fetcher)
+    const { mutate } = useSWRConfig()
 
     const [title, setTitle] = useState("");
 
@@ -18,7 +20,7 @@ export default function Workout() {
 
     const createWorkout = async () => {
         try {
-            const response = await axios.post(
+            const { data } = await axios.post(
                 `/api/workout/${session?.user.id}`,
               {
                 userId: session?.user.id,
@@ -30,11 +32,15 @@ export default function Workout() {
                 },
               },
             );
-        
-            if (!response.success) {
-                return <p>No success</p>
+
+            if (data.error) {
+                return console.log(data.error);
             }
-            console.log(response) //check now
+
+            setTitle("");
+            mutate(`/api/workout/${session?.user.id}`);
+            console.log('Added workout successfully')
+
           } catch (error) {
             console.log(error)
           }
@@ -46,7 +52,7 @@ export default function Workout() {
                 <code className="bg-black text-white px-4 py-2 rounded">/pages/settings/workouts/index.js</code>
             </Heading>
 
-            <input onChange={e => setTitle(e.target.value)} value={title} />
+            <input onChange={e => setTitle(e.target.value)} value={title} className="mt-5" />
             <button onClick={createWorkout}>Create</button>
 
             <div className="mt-3 space-y-2">

@@ -8,45 +8,45 @@ export default async function handler(req, res) {
 
     const id = session?.user.id;
 
-    try {
-        const foundWorkouts = await client.db().collection('workouts').find({
-            userId: id
-        }).toArray();
-
-        if (!foundWorkouts) {
-            return res.status(404).json({ message: 'Data not found' });
-        }
-
-
-        return res.status(200).json(foundWorkouts);
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to fetch workouts'})
-    }
-
-    if (req.method === 'POST') {
-        const { title, userId } = req.body;
+    // Get workouts by userId
+    if (req.method === 'GET') {
         try {
-            const addWorkout = await client.db().collection('workouts').insertOne({
-                userId: id,
-                title: title
-            }).toArray()
+            const workouts = await client.db().collection('workouts').find({
+                userId: id // @TODO: Change to user_id instead
+            }).toArray();
     
-            if (!addWorkout) {
-                return res.status(404).json({ message: 'Data not found' });
+            if (!workouts) {
+                return res.status(404).json({ message: 'Workouts not found' });
             }
     
     
-            return res.status(200).json(addWorkout);
+            return res.status(200).json(workouts);
         } catch (error) {
-            res.status(500).json({ message: 'Failed to post workout'})
+            res.status(500).json({ message: 'Failed to fetch workouts'})
+        }
+    }
+    
+    // Create workout and assign it the logged in users: userId
+    if (req.method === 'POST') {
+        const { title } = req.body;
+        try {
+            const addWorkout = await client.db().collection('workouts').insertOne({
+                userId: id, // @TODO: Change to user_id instead
+                title: title
+            })
+    
+            if (!addWorkout) {
+                return res.status(404).json({ message: 'Failed to create workout' });
+            }
+    
+    
+            return res.status(201).json({addWorkout});
+        } catch (error) {
+            res.status(500).json({ message: 'Could not find collection'})
         }
     }
 
     if (req.method === 'DELETE') {
         // handle delete request
     }
-
-    // const workoutslol = await client.db().collection('workouts').find({}).toArray();
-    
-    // return res.status(200).json(accounts);
 }

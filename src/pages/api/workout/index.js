@@ -8,21 +8,6 @@ export default async function handler(req, res) {
 
     const id = session?.user.id;
 
-    try {
-        const foundWorkouts = await client.db().collection('workouts').find({
-            userId: id
-        }).toArray();
-
-        if (!foundWorkouts) {
-            return res.status(404).json({ message: 'Data not found' });
-        }
-
-
-        return res.status(200).json(foundWorkouts);
-    } catch (error) {
-        res.status(500).json({ message: 'Failed to fetch workouts'})
-    }
-
     // Mongoose??
 
     // Update styles with tailwind and tailwind config
@@ -35,7 +20,7 @@ export default async function handler(req, res) {
     if (req.method === 'DELETE') {
         // handle delete request
     }
-    const accounts = await client.db().collection('workouts').find({}).toArray();
+    // const accounts = await client.db().collection('workouts').find({}).toArray();
     
-    return res.status(200).json(accounts);
+    // return res.status(200).json(accounts);
 }
