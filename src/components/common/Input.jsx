@@ -8,7 +8,7 @@ export default function Input(props) {
             <input
                 {...props}
                 type={props.type ? props.type : "text"}
-                className={`${props.classNames} rounded border border-purple p-2 text-sm w-full disabled:bg-off-white ${props.children && "pl-5"}`}
+                className={`${props.classNames} rounded focus:border-purple border border-purple p-2 text-sm w-full disabled:bg-off-white ${props.children && "pl-5"}`}
                 onKeyDown={props.type == "number" ? blockInvalidCharacters : props.onKeyDown}
             />
 

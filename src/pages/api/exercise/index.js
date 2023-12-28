@@ -16,13 +16,13 @@ export default async function handler(req, res) {
             }).toArray();
     
             if (!exercises) {
-                return res.status(404).json({ message: 'Exercises not found' });
+                return res.status(404).json({ message: 'Exercises not found!' });
             }
     
     
             return res.status(200).json(exercises);
         } catch (error) {
-            res.status(500).json({ message: 'Failed to fetch workouts'})
+            res.status(500).json({ message: 'Failed to fetch workouts!'})
         }
     }
     
@@ -37,15 +37,31 @@ export default async function handler(req, res) {
                 sets: sets,
                 repetitions: repetitions
             })
+
+            if (!title) {
+                return res.status(400).json({ message: "Title is required!" });
+            }
+
+            if (!weight) {
+                return res.status(400).json({ message: "Weight is required!" });
+            }
+
+            if (!sets) {
+                return res.status(400).json({ message: "Sets are required!" });
+            }
+
+            if (!repetitions) {
+                return res.status(400).json({ message: "Repetitions are required!" });
+            }
     
             if (!addExercise) {
-                return res.status(404).json({ message: 'Failed to create exercise' });
+                return res.status(400).json({ message: 'Failed to create exercise!' });
             }
     
     
             return res.status(200).json({addExercise});
         } catch (error) {
-            res.status(500).json({ message: 'Could not find collection'})
+            res.status(500).json({ message: 'Could not find collection!'})
         }
     }
 }
