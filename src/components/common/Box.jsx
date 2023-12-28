@@ -7,7 +7,7 @@ export default function Box({ props, colour = "white", classnames = "", children
     }
 
     return (
-        <section className={`font-grotesk border-2 m-2 border-black rounded p-4 ${colour == "white" ? "text-black" : "text-white"} ${colours[colour]} ${classnames}`} {...props}>
+        <section className={`font-grotesk border-2 border-black rounded p-4 ${colour == "white" ? "text-black" : "text-white"} ${colours[colour]} ${classnames}`} {...props}>
             {children}
         </section>
     )

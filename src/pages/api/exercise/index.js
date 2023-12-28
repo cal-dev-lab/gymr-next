@@ -8,39 +8,42 @@ export default async function handler(req, res) {
 
     const id = session?.user.id;
 
-    // Get workouts by user_id
+    // Get exercises by user_id
     if (req.method === 'GET') {
         try {
-            const workouts = await client.db().collection('workouts').find({
+            const exercises = await client.db().collection('exercises').find({
                 user_id: id
             }).toArray();
     
-            if (!workouts) {
-                return res.status(404).json({ message: 'Workouts not found' });
+            if (!exercises) {
+                return res.status(404).json({ message: 'Exercises not found' });
             }
     
     
-            return res.status(200).json(workouts);
+            return res.status(200).json(exercises);
         } catch (error) {
             res.status(500).json({ message: 'Failed to fetch workouts'})
         }
     }
     
-    // Create workout and assign it the logged in users: user_id
+    // Create exercise and assign it the logged in users: user_id
     if (req.method === 'POST') {
-        const { title } = req.body;
+        const { title, weight, sets, repetitions } = req.body;
         try {
-            const addWorkout = await client.db().collection('workouts').insertOne({
+            const addExercise = await client.db().collection('exercises').insertOne({
                 user_id: id,
-                title: title
+                title: title,
+                weight: weight,
+                sets: sets,
+                repetitions: repetitions
             })
     
-            if (!addWorkout) {
-                return res.status(404).json({ message: 'Failed to create workout' });
+            if (!addExercise) {
+                return res.status(404).json({ message: 'Failed to create exercise' });
             }
     
     
-            return res.status(201).json({addWorkout});
+            return res.status(200).json({addExercise});
         } catch (error) {
             res.status(500).json({ message: 'Could not find collection'})
         }
