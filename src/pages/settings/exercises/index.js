@@ -9,6 +9,7 @@ import Modal from 'react-responsive-modal';
 import 'react-responsive-modal/styles.css';
 import CreateExerciseModal from '@/components/workouts/CreateExerciseModal';
 import Box from '@/components/common/Box';
+import ExerciseRow from '@/components/exercises/ExerciseRow';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
@@ -35,11 +36,12 @@ export default function Exercises() {
                 {
                     exercises?.length > 0 ? (
                         exercises?.map(exercise => (
-                            <div key={exercise._id} className="bg-purple p-4 text-white rounded">
-                                <Heading classNames='text-white'>
-                                    <b>{exercise.title}</b>
-                                </Heading>
-                            </div>
+                            // <div key={exercise._id} className="bg-purple p-4 text-white rounded">
+                            //     <Heading classNames='text-white'>
+                            //         <b>{exercise.title}</b>
+                            //     </Heading>
+                            // </div>
+                            <ExerciseRow key={exercise._id} exercise={exercise} />
                         ))
                     ) : (
                         <Box>

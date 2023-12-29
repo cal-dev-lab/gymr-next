@@ -11,7 +11,6 @@ import { useSWRConfig } from "swr"
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
 export default function Workout() {
-    const { data: session } = useSession();
     const { data: workouts } = useSWR("/api/workout", fetcher)
     const { data: exercises } = useSWR("/api/exercise", fetcher)
     const { mutate } = useSWRConfig()
