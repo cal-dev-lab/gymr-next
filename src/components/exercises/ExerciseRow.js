@@ -10,7 +10,8 @@ export default function ExerciseRow({ exercise }) {
 
             <Box>
                 Reps: <br /> {exercise.repetitions}
-            </Box>
+            	Sets: <br /> {exercise.sets}
+	    </Box>
         </Box>
     )
 }
