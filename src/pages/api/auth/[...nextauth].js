@@ -2,6 +2,7 @@ import NextAuth from "next-auth/next";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import createMongoConnection from "@/utils/mongodb";
 import GithubProvider from "next-auth/providers/github";
+import TwitterProvider from "next-auth/providers/twitter";
 
 export const authOptions = {
     adapter: MongoDBAdapter(createMongoConnection),
@@ -15,11 +16,17 @@ export const authOptions = {
           return session;
         },
     },
+    // 'Try signing in with a diff. acc.' -> Whitelist IP in Mongo
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_APP_CLIENT_ID,
             clientSecret: process.env.GITHUB_APP_CLIENT_SECRET
-        })
+        }),
+        TwitterProvider({
+          clientId: process.env.TWITTER_CLIENT_ID,
+          clientSecret: process.env.TWITTER_SECRET,
+          version: "2.0"
+      })
     ]
 };
 

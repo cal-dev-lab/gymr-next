@@ -14,8 +14,6 @@ export default function Home() {
         <main>
           <Navbar />
         </main>
-
-        // Add more providers for login
       )
     }
     </>
