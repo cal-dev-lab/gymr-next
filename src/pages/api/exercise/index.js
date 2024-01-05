@@ -28,22 +28,26 @@ export default async function handler(req, res) {
     
     // Create exercise and assign it the logged in users: user_id
     if (req.method === 'POST') {
-        const { title, weight, sets, repetitions } = req.body;
+        const { title, weight, sets, repetitions, duration, type } = req.body;
         try {
             const addExercise = await client.db().collection('exercises').insertOne({
                 user_id: id,
                 title: title,
                 weight: weight,
                 sets: sets,
-                repetitions: repetitions
+                repetitions: repetitions,
+                duration: duration,
+                type: type
             })
 
             if (!title) {
                 return res.status(400).json({ message: "Title is required!" });
             }
 
-            if (!weight) {
-                return res.status(400).json({ message: "Weight is required!" });
+            if (type == "weight") {
+                if (!weight) {
+                    return res.status(400).json({ message: "Weight is required!" });
+                }
             }
 
             if (!sets) {
@@ -52,6 +56,12 @@ export default async function handler(req, res) {
 
             if (!repetitions) {
                 return res.status(400).json({ message: "Repetitions are required!" });
+            }
+
+            if (type == "cardio") {
+                if (!duration) {
+                    return res.status(400).json({ message: "Duration is required!" });
+                }
             }
     
             if (!addExercise) {

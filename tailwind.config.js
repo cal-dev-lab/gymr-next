@@ -26,6 +26,9 @@ module.exports = {
       'green': '#1bcf36'
     },
     extend: {
+      fontFamily: {
+        'grotesk': ['Space Grotesk', 'sans-serif']
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

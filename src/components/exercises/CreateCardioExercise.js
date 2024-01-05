@@ -1,18 +1,19 @@
 import { useState } from "react";
-import Button from "../common/Button";
 import Heading from "../common/Heading";
 import Input from "../common/Input";
 import axios from "axios";
-import Link from "next/link";
 import toast from "react-hot-toast";
 import { mutate } from "swr";
+import Link from "next/link";
+import Button from "../common/Button";
 
-export default function CreateExerciseModal({ setShowModal }) {
+export default function CreateCardioExercise() {
     const [fields, setFields] = useState({
         title: "",
-        weight: "",
+        duration: "",
         sets: "",
-        repetitions: ""
+        repetitions: "",
+        type: "cardio"
     });
 
     const createExercise = async () => {
@@ -31,9 +32,8 @@ export default function CreateExerciseModal({ setShowModal }) {
             }
 
             mutate("/api/exercise");
-            setShowModal(false);
             setFields({});
-            toast.success('Created workout successfully!')
+            toast.success('Created exercise successfully!')
 
         } catch (error) {
             toast.error(error.message)
@@ -41,7 +41,7 @@ export default function CreateExerciseModal({ setShowModal }) {
     }
 
     // Checks if all fields lengths are not empty
-    const isValid = Object.values(fields).every(field => field.length > 0)
+    const isValid = Object.values(fields).every(field => field.length > 0);
 
     return (
         <section className="mt-5 font-grotesk space-y-6">
@@ -65,12 +65,12 @@ export default function CreateExerciseModal({ setShowModal }) {
                 </div>
 
                 <div>
-                    <p>Weight (kg)</p>
+                    <p>Duration (minutes)</p>
                     <Input
                         type="number"
-                        value={fields.weight ?? ""}
-                        onChange={e => setFields({...fields, weight: e.target.value})}
-                        placeholder="Enter weight..."
+                        value={fields.duration ?? ""}
+                        onChange={e => setFields({...fields, duration: e.target.value})}
+                        placeholder="Enter duration..."
                     />
                 </div>
 

@@ -9,13 +9,13 @@ export default function Input(props) {
                 {...props}
                 type={props.type ? props.type : "text"}
                 className={`${props.classNames} rounded focus:border-purple border border-purple p-2 text-sm w-full disabled:bg-off-white ${props.children && "pl-5"}`}
-                onKeyDown={props.type == "number" ? blockInvalidCharacters : props.onKeyDown}
+                onKeyDown={props.type === "number" ? blockInvalidCharacters : props.onKeyDown}
             />
 
             {
                 props.children && (
                     <div className="absolute inset-y-0 left-0 flex items-center pl-2">
-                            {props.children}
+                        {props.children}
                     </div>
                 )
             }

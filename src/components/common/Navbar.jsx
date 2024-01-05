@@ -2,7 +2,8 @@
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Heading from "./Heading";
-import { HiBars3BottomRight } from "react-icons/hi2";
+import { HiBars3BottomRight, HiUser } from "react-icons/hi2";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export default function Navbar() {
     const { data: session } = useSession();
@@ -17,9 +18,12 @@ export default function Navbar() {
 
     return (
         <section className="h-20 flex items-center justify-between">
-            <div>
-                <Image src={session?.user.image} loading="lazy" width="170" height="170" alt="User avatar" className="rounded h-10 w-10 bg-white object-cover" />
-            </div>
+            <Avatar>
+                <AvatarImage src={session?.user.image} />
+                <AvatarFallback>
+                    <HiUser />
+                </AvatarFallback>
+            </Avatar>
 
             <div className="text-center">
                 <Heading size="xs">
