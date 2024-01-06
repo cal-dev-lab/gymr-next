@@ -10,11 +10,11 @@ export default function Settings() {
 			<Navbar />
 
 			<Box classnames="mt-2">
-                <Heading size="xl">
-                    <b>Settings</b>
-                </Heading>
-                <p>Here you can configure different aspects of your app.</p>
-            </Box>
+				<Heading size="xl">
+					<b>Settings</b>
+				</Heading>
+				<p>Here you can configure different aspects of your app.</p>
+			</Box>
 
 			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
 				<Link href="/settings/exercises">
