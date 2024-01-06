@@ -1,64 +1,48 @@
 import Heading from '@/components/common/Heading';
 import Loader from '@/components/common/Loader';
-import WorkoutCard from '@/components/workouts/WorkoutCard';
-import axios from 'axios';
-import { useSession } from 'next-auth/react';
 import { useState } from 'react';
-import toast from 'react-hot-toast';
-import useSWR from 'swr'
-import { useSWRConfig } from "swr"
+import useSWR from "swr";
+import { useSWRConfig } from "swr";
+import 'react-responsive-modal/styles.css';
+import Box from '@/components/common/Box';
+import ExerciseRow from '@/components/exercises/ExerciseRow';
+import CreateExerciseSheet from '@/components/exercises/CreateExerciseSheet';
+import Navbar from '@/components/common/Navbar';
 
 const fetcher = (...args) => fetch(...args).then(res => res.json())
 
-export default function Workout() {
-    const { data: workouts } = useSWR("/api/workout", fetcher)
-    const { data: exercises } = useSWR("/api/exercise", fetcher)
-    const { mutate } = useSWRConfig()
+export default function Workouts() {
+    const { data: workouts, error, isLoading } = useSWR("/api/workout", fetcher);
 
-    const [title, setTitle] = useState("");
-
-    if (!workouts) return <Loader />
-
-    const createWorkout = async () => {
-        try {
-            const { data } = await axios.post(
-                `/api/workout`, {title: title},
-              {
-                headers: {
-                  "Content-Type": "application/json",
-                },
-              },
-            );
-
-            if (data.error) {
-                return toast.error(data.error);
-            }
-
-            setTitle("");
-            mutate("/api/workout");
-            toast.success('Added workout successfully!')
-
-          } catch (error) {
-            toast.error(error)
-          }
-    }
+    if (error) return <div>failed to load</div>;
+    if (!workouts) return <Loader />;
 
     return (
-        <div>
-            <input onChange={e => setTitle(e.target.value)} value={title} />
-            <button onClick={createWorkout}>Create</button>
+        <div className="space-y-2">
+            <Navbar />
 
-            <section className="space-y-2">
-              {
-                workouts?.length > 0 ? (
-                  workouts.map(workout => (
-                    <WorkoutCard workout={workout} exercises={exercises} />
-                  ))
-                ) : (
-                  <Loader />
-                )
-              }
-            </section>
+            <Box classnames='mt-2'>
+                <Heading size="xl">
+                    <b>Manage your workouts</b>
+                </Heading>
+                <p>Create, update or delete your workouts.</p>
+            </Box>
+
+            <CreateExerciseSheet />
+
+            <div className="mt-3 space-y-2">
+                {
+                    workouts?.length > 0 ? (
+                        workouts?.map(workout => (
+                            <ExerciseRow key={wokrout._id} workout={workout} />
+                        ))
+                    ) : (
+                        <Box>
+                            <p className="text-sm">You have no workouts available.</p>
+                        </Box>
+                    )
+                }
+            </div>
         </div>
     )
 }

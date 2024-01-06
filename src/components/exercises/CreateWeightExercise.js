@@ -36,7 +36,7 @@ export default function CreateWeightExercise() {
             toast.success('Created exercise successfully!')
 
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.response.data.message)
         }
     }
 

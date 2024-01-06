@@ -25,7 +25,7 @@ export default function WorkoutCard({ workout, exercises }) {
             );
 
             if (data.error) {
-                return toast.error(data.error);
+                return toast.error(error.response.data.message);
             }
 
 

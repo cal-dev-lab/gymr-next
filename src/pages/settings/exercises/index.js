@@ -1,8 +1,6 @@
 import Heading from '@/components/common/Heading';
 import Loader from '@/components/common/Loader';
-import { useState } from 'react';
 import useSWR from "swr";
-import { useSWRConfig } from "swr";
 import 'react-responsive-modal/styles.css';
 import Box from '@/components/common/Box';
 import ExerciseRow from '@/components/exercises/ExerciseRow';
