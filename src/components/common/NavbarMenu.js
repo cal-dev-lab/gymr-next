@@ -9,10 +9,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { Router } from "next/router";
+import { Router, useRouter } from "next/router";
 import { HiBars3BottomRight } from "react-icons/hi2";
 
 export default function NavbarMenu() {
+    const router = useRouter();
+
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -39,7 +41,7 @@ export default function NavbarMenu() {
                 <DropdownMenuSeparator className="bg-purple" />
                 <DropdownMenuItem onClick={() => {
                     signOut()
-                    Router.push("/")
+                    router.push("/")
                 }}>
                     Log out
                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
