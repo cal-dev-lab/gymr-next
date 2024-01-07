@@ -3,6 +3,8 @@ import axios from "axios";
 import { useSWRConfig } from "swr";
 import ExerciseList from "./ExerciseList";
 import toast from "react-hot-toast";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
 
 export default function WorkoutCard({ workout, exercises }) {
     const { mutate } = useSWRConfig()
@@ -63,7 +65,7 @@ export default function WorkoutCard({ workout, exercises }) {
 
     return (
         <>
-            <div key={workout._id}>
+            <ScrollArea key={workout._id} className="h-[300px] w-full rounded border p-4">
                     <div className="space-y-2 mt-2">
                         {
                             exercises?.length > 0 ? (
@@ -76,11 +78,14 @@ export default function WorkoutCard({ workout, exercises }) {
                                     />
                                 ))
                             ) : (
-                                <Loader />
+                                <div>
+                                    <b>No exercises found!</b>
+                                    <p>You can create exercises in the <Link className="text-purple" href="/settings/exercises">exercise settings</Link> page.</p>
+                                </div>
                             )
                         }
                     </div>
-            </div>
+            </ScrollArea>
         </>
     )
 }
