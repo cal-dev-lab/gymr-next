@@ -30,7 +30,7 @@ export default function NavbarMenu() {
                 <DropdownMenuLabel>Navigation</DropdownMenuLabel>
                 <DropdownMenuSeparator className="bg-purple" />
                 <DropdownMenuItem>
-                    <Link href="/settings">Home</Link>
+                    <Link href="/">Home</Link>
                     <DropdownMenuShortcut>⌘H</DropdownMenuShortcut>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
