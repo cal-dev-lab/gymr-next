@@ -9,17 +9,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { HiBars3BottomRight } from "react-icons/hi2";
 
 export default function NavbarMenu() {
-    const router = useRouter();
-
-    const logout = () => {
-        signOut();
-        router.push("/");
-    }
-
     return (
         <DropdownMenu>
             <DropdownMenuTrigger>
@@ -44,7 +36,7 @@ export default function NavbarMenu() {
                     <DropdownMenuShortcut>⌘U</DropdownMenuShortcut>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator className="bg-purple" />
-                <DropdownMenuItem onClick={logout}>
+                <DropdownMenuItem onClick={() => signOut({ callbackUrl: "https://gymr.netlify.app/"})}>
                     Log out
                     <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
                 </DropdownMenuItem>
