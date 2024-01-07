@@ -1,6 +1,3 @@
-import { useState } from "react";
-import Box from "../common/Box";
-import Heading from "../common/Heading";
 import Loader from "../common/Loader";
 import axios from "axios";
 import { useSWRConfig } from "swr";
@@ -8,7 +5,6 @@ import ExerciseList from "./ExerciseList";
 import toast from "react-hot-toast";
 
 export default function WorkoutCard({ workout, exercises }) {
-    const [show, setShow] = useState(false);
     const { mutate } = useSWRConfig()
 
     const addExercise = async (exerciseId) => {
@@ -67,20 +63,8 @@ export default function WorkoutCard({ workout, exercises }) {
 
     return (
         <>
-            <Box colour="purple" key={workout._id}>
-                <div className="flex items-center justify-between">
-                    <Heading classNames="text-white">
-                        <b>{workout.title}</b>
-                    </Heading>
-
-                    <button onClick={() => setShow(!show)}>Click me</button>
-                </div>
-
-                
-
-                {
-                show && (
-                    <Box classnames="space-y-2 mt-2">
+            <div key={workout._id}>
+                    <div className="space-y-2 mt-2">
                         {
                             exercises?.length > 0 ? (
                                 exercises.map(exercise => (
@@ -95,12 +79,8 @@ export default function WorkoutCard({ workout, exercises }) {
                                 <Loader />
                             )
                         }
-                    </Box>
-                )
-            }
-            </Box>
-
-            
+                    </div>
+            </div>
         </>
     )
 }

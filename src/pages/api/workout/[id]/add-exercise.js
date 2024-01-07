@@ -4,7 +4,7 @@ import { ObjectId } from "mongodb";
 export default async function handler(req, res) {
     const client = await createMongoConnection;
 
-    // Add exercise to workout
+    // Add exercise to workout array
     if (req.method === 'POST') {
         const { exercise_id } = req.body;
 

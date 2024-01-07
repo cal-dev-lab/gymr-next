@@ -2,7 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import CreateWeightExercise from "./CreateWeightExercise";
 import CreateCardioExercise from "./CreateCardioExercise";
 
-export default function CreateExerciseModal() {
+export default function CreateExerciseForm() {
     const tabSelectorClass = "w-full data-[state=active]:bg-purple data-[state=active]:text-white data-[state=active]:rounded"
     
     return (

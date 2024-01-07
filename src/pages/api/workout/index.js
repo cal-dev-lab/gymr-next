@@ -28,12 +28,17 @@ export default async function handler(req, res) {
     
     // Create workout and assign it the logged in users: user_id
     if (req.method === 'POST') {
-        const { title } = req.body;
+        const { title, exercises } = req.body;
         try {
             const addWorkout = await client.db().collection('workouts').insertOne({
                 user_id: id,
-                title: title
+                title: title,
+                exercises: exercises ?? []
             })
+
+            if (!title) {
+                return res.status(401).json({ message: "Title is required!" });
+            }
     
             if (!addWorkout) {
                 return res.status(404).json({ message: 'Failed to create workout' });
