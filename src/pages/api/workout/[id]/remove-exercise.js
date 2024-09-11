@@ -6,15 +6,15 @@ export default async function handler(req, res) {
 
     // Remove exercise from workout
     if (req.method === 'POST') {
-        const { exercise_id } = req.body;
+        const { exercise_id, exercise_title } = req.body;
 
         try {
             const addExercise = await client.db().collection('workouts').updateOne(
                 { _id: new ObjectId(req.query.id) },
-                { $pull: { exercises: exercise_id } },
+                { $pull: { exercises: exercise_id, exercise_title } },
                 false, // Upsert
                 true // Multi
-             )
+            )
     
             if (!addExercise) {
                 return res.status(400).json({ message: 'Failed to remove exercise!' });

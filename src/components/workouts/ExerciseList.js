@@ -12,18 +12,18 @@ export default function ExerciseList({ workout, exercise, addExercise, removeExe
                     workout.exercises.includes(exercise._id) ? (
                         <Button
                             classnames="gap-2"
-                            onClick={() => removeExercise(exercise._id)}
+                            onClick={() => removeExercise(exercise._id, exercise.title)}
                         >
                             <HiTrash />
-                            <span className="flex">Remove</span>
+                            <span className="hidden sm:flex">Remove</span>
                         </Button>
                     ) : (
                         <Button
-                            onClick={() => addExercise(exercise._id)}
+                            onClick={() => addExercise(exercise._id, exercise.title)}
                             classnames="gap-2"
                         >
                             <HiPlus />
-                            <span className="flex">Add</span>
+                            <span className="hidden sm:flex">Add</span>
                         </Button>
                     )
                 }

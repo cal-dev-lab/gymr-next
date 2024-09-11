@@ -1,6 +1,7 @@
 import Navbar from '@/components/common/Navbar';
 import { useSession } from 'next-auth/react';
 import Login from './login';
+import YourWorkouts from '@/components/home/YourWorkouts';
 
 export default function Home() {
   const { data: session } = useSession();
@@ -13,6 +14,7 @@ export default function Home() {
       ) : (
         <main>
           <Navbar />
+          <YourWorkouts />
         </main>
       )
     }

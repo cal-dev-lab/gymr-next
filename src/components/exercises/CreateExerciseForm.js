@@ -1,9 +1,9 @@
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CreateWeightExercise from "./CreateWeightExercise";
 import CreateCardioExercise from "./CreateCardioExercise";
 
 export default function CreateExerciseForm() {
-    const tabSelectorClass = "w-full data-[state=active]:bg-purple data-[state=active]:text-white data-[state=active]:rounded"
+    const tabSelectorClass = "w-full data-[state=active]:bg-purple data-[state=active]:text-white data-[state=active]:rounded";
     
     return (
         <Tabs defaultValue="weight" className="w-full font-grotesk mt-2">

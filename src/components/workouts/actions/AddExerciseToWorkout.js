@@ -38,7 +38,7 @@ export default function AddExerciseToWorkout({ workout, exercises }) {
 
                 <WorkoutCard workout={workout} exercises={exercises} />
 
-                <p className="text-sm flex gap-2">
+                <p className="text-sm sm:flex gap-2">
                     Can't find the right exercise?
                     <Link href="/settings/exercises" className={!exercises ? "hidden" : "flex text-purple"}>
                         Create more here.
