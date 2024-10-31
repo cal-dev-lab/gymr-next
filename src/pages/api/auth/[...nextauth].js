@@ -16,7 +16,10 @@ export const authOptions = {
           return session;
         },
     },
-    // 'Try signing in with a diff. acc.' -> Whitelist IP in Mongo
+    /**
+     * Incase of error signing in:
+     * 'Try signing in with a diff. acc.' -> Whitelist IP in Mongo
+    */
     providers: [
         GithubProvider({
             clientId: process.env.GITHUB_APP_CLIENT_ID,
