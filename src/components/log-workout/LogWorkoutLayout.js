@@ -11,9 +11,8 @@ export default function LogWorkoutLayout() {
     const tabSelectorClass = "data-[state=active]:bg-purple w-full data-[state=active]:text-white data-[state=active]:rounded";
     const workoutsAvailable = workouts?.length > 0;
 
-    if (isLoading) {
+    if (isLoading)
         return <Loader />;
-    }
 
     return (
         <Tabs defaultValue={workouts[0]?.title} className="font-grotesk mt-2">
@@ -21,7 +20,11 @@ export default function LogWorkoutLayout() {
                 {
                     workoutsAvailable ? (
                         workouts.map(workout => (
-                            <TabsTrigger className={tabSelectorClass} value={workout.title}>
+                            <TabsTrigger
+                                key={workout.id}
+                                className={tabSelectorClass}
+                                value={workout.title}
+                            >
                                 {workout.title}
                             </TabsTrigger>
                         ))
@@ -34,10 +37,10 @@ export default function LogWorkoutLayout() {
             {
                 workoutsAvailable && (
                     workouts.map(workout => (
-                        <TabsContent value={workout.title} className="w-full space-y-2">
+                        <TabsContent key={workout.title} value={workout.title} className="w-full space-y-2">
                             {
                                 workout?.exercise_title?.map(exercise => (
-                                    <Box>
+                                    <Box key={exercise}>
                                         <p>{exercise}</p>
                                     </Box>
                                 ))
