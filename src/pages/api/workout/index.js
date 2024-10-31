@@ -50,4 +50,28 @@ export default async function handler(req, res) {
             res.status(500).json({ message: 'Could not find collection'})
         }
     }
+
+    // Create workout and assign it the logged in users: user_id
+    if (req.method === 'PUT') {
+        const { title } = req.body;
+        try {
+            const updateWorkoutTitle = await client.db().collection('workouts').updateOne({
+                user_id: id,
+                title: title,
+            })
+
+            if (!title) {
+                return res.status(401).json({ message: "Title is required!" });
+            }
+    
+            if (!updateWorkoutTitle) {
+                return res.status(404).json({ message: 'Failed to create workout' });
+            }
+    
+    
+            return res.status(201).json({updateWorkoutTitle});
+        } catch (error) {
+            res.status(500).json({ message: 'Could not find collection'})
+        }
+    }
 }

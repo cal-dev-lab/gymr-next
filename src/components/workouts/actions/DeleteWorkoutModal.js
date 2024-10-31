@@ -19,11 +19,11 @@ export default function DeleteWorkoutModal({ workout }) {
         try {
             const { data } = await axios.delete(
                 `/api/workout/${workout._id}`,
-              {
-                headers: {
-                  "Content-Type": "application/json",
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
                 },
-              },
             );
 
             if (data.error) {

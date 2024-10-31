@@ -13,7 +13,7 @@ export default function Workouts() {
     const { data: exercises } = useSWR("/api/exercise", fetcher);
 
     if (error) return <div>failed to load</div>;
-    if (!workouts) return <Loader />;
+    if (isLoading) return <Loader />;
 
     return (
         <div className="space-y-2">

@@ -3,6 +3,7 @@ import Box from "../common/Box";
 import Heading from "../common/Heading";
 import DeleteExerciseModal from "./actions/DeleteWorkoutModal";
 import AddExerciseToWorkout from "./actions/AddExerciseToWorkout";
+import EditWorkoutModal from "./actions/EditWorkoutModal";
 
 export default function WorkoutRow({ exercises, workout }) {
     return (
@@ -15,8 +16,8 @@ export default function WorkoutRow({ exercises, workout }) {
                 {/* Actions */}
                 <div className="flex gap-2">
                     <AddExerciseToWorkout workout={workout} exercises={exercises} />
-                    
-                    <HiPencil /> {/* Edit workout title modal */}
+
+                    <EditWorkoutModal workout={workout} />
                     
                     <DeleteExerciseModal workout={workout} />
                 </div>
