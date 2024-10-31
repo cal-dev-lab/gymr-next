@@ -1,4 +1,3 @@
-import Loader from "../common/Loader";
 import axios from "axios";
 import { useSWRConfig } from "swr";
 import ExerciseList from "./ExerciseList";
